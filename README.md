@@ -1,6 +1,6 @@
-# Can a vision language model watch ten factory cameras on one edge box?
+# Update the model in milliseconds, not a retrain
 
-A three day test, built on a phone, a steel tray and a cloud GPU.
+Can a factory camera system keep up with change by teaching a tiny model on the fly, instead of retraining a big one every time? A three day test, built on a phone, a steel tray and a cloud GPU.
 
 By Chander Maurya Kumbkarni · September 2026
 
@@ -23,17 +23,20 @@ Code is under the MIT licence. The clips, frames and video are my own footage.
 
 ## 1. The short version
 
-- **The question:** factory camera systems often run a stack of fine-tuned detectors. They are accurate, but every new part, light or layout means new images, new labels and a retrain. Could a vision language model (VLM) fix that, on one edge box, with no image leaving the site?
-- **The constraint:** 10 cameras at 0.5 frames per second on a single Jetson AGX Orin 32GB class box. That is 5 frames per second, so about 200 ms of GPU time per frame for everything.
-- **The answer:** yes, if the VLM decides instead of writing. Same model, same frames: 76 ms to pick Yes or No, 498 ms to write a 60 token JSON answer.
-- **The design:** a tiny classifier answers every frame. The VLM only sees the frames the classifier is unsure about, and its confident answers become training labels. The classifier refits every night in milliseconds. Automatic checks decide what goes live.
+- **The problem:** factory camera systems often run a stack of fine-tuned detectors. They are accurate but static: every new part, light or layout means new images, new labels and a full retrain on a GPU.
+- **The idea:** freeze the big image model and only ever relearn a tiny layer on top of it (769 numbers). A small vision language model (VLM) labels the frames the tiny model is unsure about, so the system can update itself every night, on a CPU, in milliseconds. Automatic checks decide whether each update goes live.
+- **The constraint:** all of it on site, on one edge box: 10 cameras at 0.5 frames per second on a single Jetson AGX Orin 32GB class box. That is 5 frames per second, so about 200 ms of GPU time per frame for everything.
+- **What the test showed:**
+  - **Updating is cheap.** A new part needed the same 5 labels either way, then a 7 ms refit on a CPU against a 26 second GPU retrain.
+  - **Self-labelling needs a check.** The VLM's 39 confident labels were all correct, and the model trained on them still scored 65%, no better than guessing. They covered only one of the two parts. Five human labels took it to 100%.
+  - **It fits, if the VLM decides instead of writing.** Same model, same frames: 76 ms to pick Yes or No, 498 ms to write a 60 token JSON answer. The whole pipeline came to an estimated 22 to 38% of the edge GPU.
 - **The honest part:** the existing style of detector was as accurate or better everywhere in my test. The win is the cost of adapting, not accuracy. And the most useful thing the test did was reject my own model.
 
 ## 2. Five ideas the design rests on
 
 | # | Idea | In one line | What the test showed |
 |---|---|---|---|
-| 1 | Decide, don't write | the VLM ticks a box in one pass instead of writing an answer word by word | 76 ms to decide against 498 ms to write, same model, same frames |
+| 1 | Decide, don't write | the VLM ticks a box in one pass instead of writing an answer word by word. Borrowed from "System One" decision models [1][2] and VQAScore [4] | 76 ms to decide against 498 ms to write, same model, same frames |
 | 2 | Ask about the machine, not the product | "is the fixture empty?" works for any part. "Is part X there?" needs data about part X | a classifier that had never seen the new part still caught it 98% of the time in daylight |
 | 3 | Specialist on every frame, generalist when unsure | the cheap model runs always, the expensive one checks the hard frames | the checker would have seen 4.8% of frames in the test |
 | 4 | Learn by refitting a tiny layer | the big image model is frozen. Only 769 numbers change | refit in 4 to 10 ms, against a 26 second GPU retrain |
@@ -66,7 +69,7 @@ flowchart TD
 
 **The parts**
 
-- **Fast classifier:** a frozen image encoder (SigLIP 2) turns each frame into 768 numbers, a fingerprint of what is in it. A logistic regression (768 weights and one offset, so 769 numbers) turns the fingerprint into a probability that a part is on the fixture. Only the 769 numbers ever learn, which is why learning takes milliseconds.
+- **Fast classifier:** a frozen image encoder (SigLIP 2, a descendant of CLIP [7]) turns each frame into 768 numbers, a fingerprint of what is in it. A logistic regression (768 weights and one offset, so 769 numbers) turns the fingerprint into a probability that a part is on the fixture. Only the 769 numbers ever learn, which is why learning takes milliseconds.
 - **The gate:** a frame goes to the checker only if the fast classifier is unsure (probability between 0.2 and 0.8), its answer just changed, or a small random audit picks it.
 - **Checker:** a small VLM asked a yes/no question. It reads the frame once and I read its probability of "Yes" straight from that pass. Nothing is written, so it cannot ramble, break a format or invent an answer.
 - **Label store and nightly refit:** confident checker answers and a few minutes of human clicks become labels. Every night the tiny head refits on them.
@@ -91,7 +94,7 @@ flowchart TD
 
 | | YOLO stand-in | Fast classifier | Checker A | Checker B |
 |---|---|---|---|---|
-| What it is | `yolo11n-cls`, a small YOLO classifier | SigLIP 2 (frozen) + logistic regression | Qwen3.5-0.8B, a small VLM | Intern-Decision-0.8B, a vision decision model |
+| What it is | `yolo11n-cls`, a small YOLO classifier [8] | SigLIP 2 (frozen) + logistic regression | Qwen3.5-0.8B, a small VLM [3] | Intern-Decision-0.8B, a vision decision model [9] |
 | Plays the role of | today's route: retrain for every change | the proposed specialist | the generalist, plain version | the generalist, purpose built |
 | Learns by | retraining all its weights on a GPU | refitting 769 numbers | never trained | never trained |
 
@@ -103,7 +106,7 @@ flowchart TD
 
 ### 5.1 Speed: deciding fits, writing does not
 
-Timed on a cloud T4 GPU. The edge box column is an estimate (T4 time x 2.5, from the published spec ratios), not a measurement.
+Timed on a cloud T4 GPU. The edge box column is an estimate (T4 time x 2.5, from the published spec ratios [5][6]), not a measurement.
 
 | Approach | T4, ms per frame | Estimated share of the edge GPU at 5 frames per second |
 |---|---|---|
@@ -119,7 +122,7 @@ Timed on a cloud T4 GPU. The edge box column is an estimate (T4 time x 2.5, from
 - Deciding is 6.6 times cheaper than writing.
 - Checker B answers 6 questions for about 1.5 times the cost of 1.
 - The 4.8% gate needs a caveat: only 2 of 105 test frames were actually flagged. The rest is a 3% random audit I set myself, and these were still clips. A live line would send more, which is why I also quote 38%.
-- On my laptop (M1 MacBook Air, 8GB, Ollama) the same pattern held: 0.47 seconds to decide against 1.66 seconds to write.
+- On my laptop (M1 MacBook Air, 8GB, Ollama) the same pattern held: 0.47 seconds to decide against 1.66 seconds to write for Qwen3.5-0.8B, and 1.11 against 3.44 for the 2B. The answers were no better there: both sizes called most empty trays "not empty".
 
 ### 5.2 Adapting to change
 
@@ -136,6 +139,8 @@ Accuracy on "is there a part on the tray?", right after the change, then what it
 ![Accuracy against labels added](results/run4/learning_curve.png)
 
 - **Labels were a tie.** Both routes got back with 5 labels. The difference is the cost of the update: a 7 millisecond refit on a CPU against a 26 second GPU retrain here. On a real detector the retrain route also means drawing boxes.
+- **Only two of the changes needed any learning.** The lighting change and the camera bump were too mild to hurt either trained model. The new part and the new layout are where the cheap update earned its place.
+- **The drift alarm stayed quiet, correctly.** After the camera bump the fast classifier was unsure on 0% of frames, the same as before, and nobody's accuracy dropped. The test never made it fire, so it is shown to stay quiet, not shown to catch drift.
 - **The last column matters.** Most test frames have a part on the tray, so a model that answers "part" without looking scores 52 to 82%. On the steel tray, checker B was no better than that.
 
 ### 5.3 The ship gate rejected my own model
@@ -162,8 +167,9 @@ At the new station I let checker A label the training frames and kept only its c
 - The classifier trained on those labels alone scored **65%**, exactly what "always say part" scores.
 - Why: 30 of the labels were "empty" and 9 were "part", and every one of the 9 was the whisk. The checker was never sure about the padlock. So the student learned "whisk means part" and missed every padlock.
 - Five human-confirmed frames took the same classifier to 100%.
+- Checker B got every station 2 test frame right, but was never more than 90% sure of any of the 92 training frames. Under the same rule it handed over zero labels.
 
-**The lesson: confident is not the same as covered.** Labels can all be right and still teach a blind spot. A teacher needs a coverage check, not only a confidence cutoff.
+**The lesson: confident is not the same as covered.** Labels can all be right and still teach a blind spot. A model that teaches itself needs a coverage check, not only a confidence cutoff, and a teacher's confidence has to be tuned per site before its labels are worth anything.
 
 ### 5.5 Counting loads: right total, wrong reason
 
@@ -177,6 +183,18 @@ One 60 second clip had the new part placed and removed twice. True answer: 2 loa
 - Checker B: 0.
 
 **The lesson:** a count can match by accident. Check the timing, not just the total.
+
+### 5.6 The checkers: blind, or just a badly placed cutoff?
+
+Both checkers answer with a probability, and I scored them at a 0.5 cutoff. So I checked whether a better cutoff would rescue them.
+
+| | AUC, station 1 | AUC, camera moved | AUC, station 2 | Station 1 average at 0.5 | With a cutoff fitted on 20 labelled frames |
+|---|---|---|---|---|---|
+| Checker A | 87% | 98% | 100% | 70.5% | 71.3% |
+| Checker B | 71% | 69% | 100% | 68.1% | 74.5% |
+
+- AUC is the chance the checker scores a loaded frame above an empty one. Checker A can mostly tell them apart. Checker B, on the steel tray, barely can.
+- A per-site cutoff helped a little. It did not turn either into a model worth shipping.
 
 ## 6. What did not work, and what I do not claim
 
@@ -205,6 +223,7 @@ One 60 second clip had the new part placed and removed twice. True answer: 2 loa
 - Test design: time-based splits, one change per test, a "dumb" baseline beside every number, and no choices made on test data.
 - Budgeting an edge GPU from published specs, and saying clearly that it is an estimate.
 - That the checks around a model (balance, coverage, ship gate, drift) can matter more than the model.
+- That once an update costs milliseconds, the hard part of a model that keeps learning moves from compute to labels: who labels, and whether the labels cover every case.
 
 ## 9. How it was built
 
