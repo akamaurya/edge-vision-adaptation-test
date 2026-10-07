@@ -1,0 +1,30 @@
+test,approach,acc_after_change_pct,labels_to_95,seconds_to_adapt,best_pct,note
+new product,YOLO retrain,91.2,5.0,25.655,100.0,
+new product,"Fast classifier, human labels",88.8,5.0,0.007,98.8,
+new product,Checker A,78.8,,,78.8,not back to 95% (best 79% at N=0)
+new product,Checker B,71.2,,,71.2,not back to 95% (best 71% at N=0)
+new product,Always 'part' (guessing),70.0,,,,the score of guessing
+"lighting, night to day",YOLO retrain,98.5,0.0,0.0,100.0,
+"lighting, night to day","Fast classifier, human labels",100.0,0.0,0.0,100.0,
+"lighting, night to day",Checker A,81.5,,,81.5,not back to 95% (best 82% at N=0)
+"lighting, night to day",Checker B,81.5,,,81.5,not back to 95% (best 82% at N=0)
+"lighting, night to day",Always 'part' (guessing),81.5,,,,the score of guessing
+"lighting, day to night",YOLO retrain,100.0,0.0,0.0,100.0,
+"lighting, day to night","Fast classifier, human labels",100.0,0.0,0.0,100.0,
+"lighting, day to night",Checker A,68.0,,,68.0,not back to 95% (best 68% at N=0)
+"lighting, day to night",Checker B,56.0,,,56.0,not back to 95% (best 56% at N=0)
+"lighting, day to night",Always 'part' (guessing),52.0,,,,the score of guessing
+camera moved,YOLO retrain,100.0,0.0,0.0,100.0,
+camera moved,"Fast classifier, human labels",100.0,0.0,0.0,100.0,
+camera moved,"Fast classifier, checker A labels",,,,,"not available, see the printout above"
+camera moved,"Fast classifier, checker B labels",,,,,"not available, see the printout above"
+camera moved,Checker A,86.5,,,86.5,not back to 95% (best 86% at N=0)
+camera moved,Checker B,67.6,,,67.6,not back to 95% (best 68% at N=0)
+camera moved,Always 'part' (guessing),67.6,,,,the score of guessing
+new layout,YOLO retrain,100.0,0.0,0.0,100.0,
+new layout,"Fast classifier, human labels",64.9,5.0,0.004,100.0,
+new layout,"Fast classifier, checker A labels",64.9,,,67.6,not back to 95% (best 68% at N=10)
+new layout,"Fast classifier, checker B labels",,,,,"not available, see the printout above"
+new layout,Checker A,94.6,,,94.6,not back to 95% (best 95% at N=0)
+new layout,Checker B,100.0,0.0,0.0,100.0,
+new layout,Always 'part' (guessing),64.9,,,,the score of guessing

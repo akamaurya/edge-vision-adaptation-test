@@ -1,0 +1,1097 @@
+{
+  "demo": false,
+  "gpu": "Tesla T4",
+  "vlm": "Qwen/Qwen3.5-0.8B",
+  "checker_b": "internlm/Intern-Decision-0.8B",
+  "checker_b_available": true,
+  "encoder": "google/siglip2-base-patch16-224",
+  "question": "This photo shows a metal tray on a table, seen from a fixed camera. Is the tray empty? Answer Yes or No.",
+  "fps_extracted": 2,
+  "skip_s": 10,
+  "run_utc": "2026-09-28 08:57 UTC",
+  "versions": {
+    "torch": "2.11.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "frames": [
+    {
+      "station": "s1",
+      "light": "day",
+      "label": "A",
+      "pool": "test",
+      "n": 12
+    },
+    {
+      "station": "s1",
+      "light": "day",
+      "label": "A",
+      "pool": "train",
+      "n": 31
+    },
+    {
+      "station": "s1",
+      "light": "day",
+      "label": "B",
+      "pool": "test",
+      "n": 41
+    },
+    {
+      "station": "s1",
+      "light": "day",
+      "label": "empty",
+      "pool": "test",
+      "n": 12
+    },
+    {
+      "station": "s1",
+      "light": "day",
+      "label": "empty",
+      "pool": "train",
+      "n": 29
+    },
+    {
+      "station": "s1",
+      "light": "night",
+      "label": "A",
+      "pool": "test",
+      "n": 13
+    },
+    {
+      "station": "s1",
+      "light": "night",
+      "label": "A",
+      "pool": "train",
+      "n": 31
+    },
+    {
+      "station": "s1",
+      "light": "night",
+      "label": "B",
+      "pool": "test",
+      "n": 15
+    },
+    {
+      "station": "s1",
+      "light": "night",
+      "label": "B",
+      "pool": "train",
+      "n": 38
+    },
+    {
+      "station": "s1",
+      "light": "night",
+      "label": "empty",
+      "pool": "test",
+      "n": 12
+    },
+    {
+      "station": "s1",
+      "light": "night",
+      "label": "empty",
+      "pool": "train",
+      "n": 29
+    },
+    {
+      "station": "s1_moved",
+      "light": "night",
+      "label": "A",
+      "pool": "test",
+      "n": 12
+    },
+    {
+      "station": "s1_moved",
+      "light": "night",
+      "label": "A",
+      "pool": "train",
+      "n": 30
+    },
+    {
+      "station": "s1_moved",
+      "light": "night",
+      "label": "B",
+      "pool": "test",
+      "n": 13
+    },
+    {
+      "station": "s1_moved",
+      "light": "night",
+      "label": "B",
+      "pool": "train",
+      "n": 31
+    },
+    {
+      "station": "s1_moved",
+      "light": "night",
+      "label": "empty",
+      "pool": "test",
+      "n": 12
+    },
+    {
+      "station": "s1_moved",
+      "light": "night",
+      "label": "empty",
+      "pool": "train",
+      "n": 30
+    },
+    {
+      "station": "s2",
+      "light": "night",
+      "label": "A",
+      "pool": "test",
+      "n": 12
+    },
+    {
+      "station": "s2",
+      "light": "night",
+      "label": "A",
+      "pool": "train",
+      "n": 30
+    },
+    {
+      "station": "s2",
+      "light": "night",
+      "label": "B",
+      "pool": "test",
+      "n": 12
+    },
+    {
+      "station": "s2",
+      "light": "night",
+      "label": "B",
+      "pool": "train",
+      "n": 30
+    },
+    {
+      "station": "s2",
+      "light": "night",
+      "label": "empty",
+      "pool": "test",
+      "n": 13
+    },
+    {
+      "station": "s2",
+      "light": "night",
+      "label": "empty",
+      "pool": "train",
+      "n": 32
+    }
+  ],
+  "accuracy_pct": [
+    {
+      "light": "day",
+      "label": "A",
+      "yolo": "100.0",
+      "head": "100.0",
+      "vlm": "100.0",
+      "idm": "100.0",
+      "always_part": "100.0"
+    },
+    {
+      "light": "day",
+      "label": "B",
+      "yolo": "97.6",
+      "head": "97.6",
+      "vlm": "97.6",
+      "idm": "100.0",
+      "always_part": "100.0"
+    },
+    {
+      "light": "day",
+      "label": "empty",
+      "yolo": "100.0",
+      "head": "100.0",
+      "vlm": "8.3",
+      "idm": "0.0",
+      "always_part": "0.0"
+    },
+    {
+      "light": "night",
+      "label": "A",
+      "yolo": "100.0",
+      "head": "100.0",
+      "vlm": "53.8",
+      "idm": "100.0",
+      "always_part": "100.0"
+    },
+    {
+      "light": "night",
+      "label": "B",
+      "yolo": "100.0",
+      "head": "46.7",
+      "vlm": "80.0",
+      "idm": "100.0",
+      "always_part": "100.0"
+    },
+    {
+      "light": "night",
+      "label": "empty",
+      "yolo": "100.0",
+      "head": "100.0",
+      "vlm": "83.3",
+      "idm": "8.3",
+      "always_part": "0.0"
+    },
+    {
+      "light": "ALL",
+      "label": "mean",
+      "yolo": "99.6",
+      "head": "90.7",
+      "vlm": "70.5",
+      "idm": "68.1",
+      "always_part": "66.7"
+    }
+  ],
+  "ship_gate": {
+    "head": false,
+    "vlm": false,
+    "idm": false
+  },
+  "yolo_retrain_s": 75,
+  "head_fit_s": 0.0,
+  "fast_c": 100,
+  "embed_ms_per_frame": 5.2,
+  "vlm_tokens_per_frame": 260,
+  "budget": [
+    {
+      "approach": "YOLO classifier",
+      "t4_ms": 5.1,
+      "orin_ms_est": 12.8,
+      "orin_frames_per_s": 78.2,
+      "orin_gpu_share_pct": 6
+    },
+    {
+      "approach": "Fast classifier",
+      "t4_ms": 6.7,
+      "orin_ms_est": 16.8,
+      "orin_frames_per_s": 59.5,
+      "orin_gpu_share_pct": 8
+    },
+    {
+      "approach": "Checker A decides, 1 question",
+      "t4_ms": 76.0,
+      "orin_ms_est": 190.0,
+      "orin_frames_per_s": 5.3,
+      "orin_gpu_share_pct": 95
+    },
+    {
+      "approach": "Checker A writes a 60-token JSON",
+      "t4_ms": 498.0,
+      "orin_ms_est": 1245.1,
+      "orin_frames_per_s": 0.8,
+      "orin_gpu_share_pct": 623
+    },
+    {
+      "approach": "Checker A, 6 questions one at a time (6 x 1 question)",
+      "t4_ms": 456.1,
+      "orin_ms_est": 1140.2,
+      "orin_frames_per_s": 0.9,
+      "orin_gpu_share_pct": 570
+    },
+    {
+      "approach": "Checker B decides, 1 question",
+      "t4_ms": 164.1,
+      "orin_ms_est": 410.2,
+      "orin_frames_per_s": 2.4,
+      "orin_gpu_share_pct": 205
+    },
+    {
+      "approach": "Checker B decides, 6 questions in one request",
+      "t4_ms": 239.3,
+      "orin_ms_est": 598.4,
+      "orin_frames_per_s": 1.7,
+      "orin_gpu_share_pct": 299
+    },
+    {
+      "approach": "Checker A decides, 1 question, gated (4.8% of frames)",
+      "t4_ms": 3.6,
+      "orin_ms_est": 9.1,
+      "orin_frames_per_s": 109.6,
+      "orin_gpu_share_pct": 5
+    },
+    {
+      "approach": "Checker B decides, 6 questions in one request, gated (4.8% of frames)",
+      "t4_ms": 11.5,
+      "orin_ms_est": 28.7,
+      "orin_frames_per_s": 34.8,
+      "orin_gpu_share_pct": 14
+    }
+  ],
+  "timing_notes": {
+    "Checker A, 6 questions one at a time (6 x 1 question)": "not timed: 6 x the 1-question time",
+    "Checker B decides, 1 question": "timed one frame at a time (checker A in batches of 10)",
+    "Checker B decides, 6 questions in one request": "timed one frame at a time (checker A in batches of 10)"
+  },
+  "orin_factor": 2.5,
+  "cycle_loads_counted": {
+    "YOLO": 2,
+    "Fast classifier": 3,
+    "Checker A": 2,
+    "Checker B": 0
+  },
+  "cycle_load_times_s": {
+    "YOLO": [
+      11.5,
+      36.0
+    ],
+    "Fast classifier": [
+      11.5,
+      36.0,
+      43.5
+    ],
+    "Checker A": [
+      1.0,
+      5.5
+    ],
+    "Checker B": []
+  },
+  "adaptation": [
+    {
+      "test": "new product",
+      "approach": "YOLO retrain",
+      "acc_after_change_pct": 91.2,
+      "labels_to_95": 5,
+      "seconds_to_adapt": 25.655,
+      "best_pct": 100.0,
+      "note": ""
+    },
+    {
+      "test": "new product",
+      "approach": "Fast classifier, human labels",
+      "acc_after_change_pct": 88.8,
+      "labels_to_95": 5,
+      "seconds_to_adapt": 0.007,
+      "best_pct": 98.8,
+      "note": ""
+    },
+    {
+      "test": "new product",
+      "approach": "Checker A",
+      "acc_after_change_pct": 78.8,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": 78.8,
+      "note": "not back to 95% (best 79% at N=0)"
+    },
+    {
+      "test": "new product",
+      "approach": "Checker B",
+      "acc_after_change_pct": 71.2,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": 71.2,
+      "note": "not back to 95% (best 71% at N=0)"
+    },
+    {
+      "test": "new product",
+      "approach": "Always 'part' (guessing)",
+      "acc_after_change_pct": 70.0,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": null,
+      "note": "the score of guessing"
+    },
+    {
+      "test": "lighting, night to day",
+      "approach": "YOLO retrain",
+      "acc_after_change_pct": 98.5,
+      "labels_to_95": 0,
+      "seconds_to_adapt": 0.0,
+      "best_pct": 100.0,
+      "note": ""
+    },
+    {
+      "test": "lighting, night to day",
+      "approach": "Fast classifier, human labels",
+      "acc_after_change_pct": 100.0,
+      "labels_to_95": 0,
+      "seconds_to_adapt": 0.0,
+      "best_pct": 100.0,
+      "note": ""
+    },
+    {
+      "test": "lighting, night to day",
+      "approach": "Checker A",
+      "acc_after_change_pct": 81.5,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": 81.5,
+      "note": "not back to 95% (best 82% at N=0)"
+    },
+    {
+      "test": "lighting, night to day",
+      "approach": "Checker B",
+      "acc_after_change_pct": 81.5,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": 81.5,
+      "note": "not back to 95% (best 82% at N=0)"
+    },
+    {
+      "test": "lighting, night to day",
+      "approach": "Always 'part' (guessing)",
+      "acc_after_change_pct": 81.5,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": null,
+      "note": "the score of guessing"
+    },
+    {
+      "test": "lighting, day to night",
+      "approach": "YOLO retrain",
+      "acc_after_change_pct": 100.0,
+      "labels_to_95": 0,
+      "seconds_to_adapt": 0.0,
+      "best_pct": 100.0,
+      "note": ""
+    },
+    {
+      "test": "lighting, day to night",
+      "approach": "Fast classifier, human labels",
+      "acc_after_change_pct": 100.0,
+      "labels_to_95": 0,
+      "seconds_to_adapt": 0.0,
+      "best_pct": 100.0,
+      "note": ""
+    },
+    {
+      "test": "lighting, day to night",
+      "approach": "Checker A",
+      "acc_after_change_pct": 68.0,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": 68.0,
+      "note": "not back to 95% (best 68% at N=0)"
+    },
+    {
+      "test": "lighting, day to night",
+      "approach": "Checker B",
+      "acc_after_change_pct": 56.0,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": 56.0,
+      "note": "not back to 95% (best 56% at N=0)"
+    },
+    {
+      "test": "lighting, day to night",
+      "approach": "Always 'part' (guessing)",
+      "acc_after_change_pct": 52.0,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": null,
+      "note": "the score of guessing"
+    },
+    {
+      "test": "camera moved",
+      "approach": "YOLO retrain",
+      "acc_after_change_pct": 100.0,
+      "labels_to_95": 0,
+      "seconds_to_adapt": 0.0,
+      "best_pct": 100.0,
+      "note": ""
+    },
+    {
+      "test": "camera moved",
+      "approach": "Fast classifier, human labels",
+      "acc_after_change_pct": 100.0,
+      "labels_to_95": 0,
+      "seconds_to_adapt": 0.0,
+      "best_pct": 100.0,
+      "note": ""
+    },
+    {
+      "test": "camera moved",
+      "approach": "Fast classifier, checker A labels",
+      "acc_after_change_pct": null,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": null,
+      "note": "not available, see the printout above"
+    },
+    {
+      "test": "camera moved",
+      "approach": "Fast classifier, checker B labels",
+      "acc_after_change_pct": null,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": null,
+      "note": "not available, see the printout above"
+    },
+    {
+      "test": "camera moved",
+      "approach": "Checker A",
+      "acc_after_change_pct": 86.5,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": 86.5,
+      "note": "not back to 95% (best 86% at N=0)"
+    },
+    {
+      "test": "camera moved",
+      "approach": "Checker B",
+      "acc_after_change_pct": 67.6,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": 67.6,
+      "note": "not back to 95% (best 68% at N=0)"
+    },
+    {
+      "test": "camera moved",
+      "approach": "Always 'part' (guessing)",
+      "acc_after_change_pct": 67.6,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": null,
+      "note": "the score of guessing"
+    },
+    {
+      "test": "new layout",
+      "approach": "YOLO retrain",
+      "acc_after_change_pct": 100.0,
+      "labels_to_95": 0,
+      "seconds_to_adapt": 0.0,
+      "best_pct": 100.0,
+      "note": ""
+    },
+    {
+      "test": "new layout",
+      "approach": "Fast classifier, human labels",
+      "acc_after_change_pct": 64.9,
+      "labels_to_95": 5,
+      "seconds_to_adapt": 0.004,
+      "best_pct": 100.0,
+      "note": ""
+    },
+    {
+      "test": "new layout",
+      "approach": "Fast classifier, checker A labels",
+      "acc_after_change_pct": 64.9,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": 67.6,
+      "note": "not back to 95% (best 68% at N=10)"
+    },
+    {
+      "test": "new layout",
+      "approach": "Fast classifier, checker B labels",
+      "acc_after_change_pct": null,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": null,
+      "note": "not available, see the printout above"
+    },
+    {
+      "test": "new layout",
+      "approach": "Checker A",
+      "acc_after_change_pct": 94.6,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": 94.6,
+      "note": "not back to 95% (best 95% at N=0)"
+    },
+    {
+      "test": "new layout",
+      "approach": "Checker B",
+      "acc_after_change_pct": 100.0,
+      "labels_to_95": 0,
+      "seconds_to_adapt": 0.0,
+      "best_pct": 100.0,
+      "note": ""
+    },
+    {
+      "test": "new layout",
+      "approach": "Always 'part' (guessing)",
+      "acc_after_change_pct": 64.9,
+      "labels_to_95": null,
+      "seconds_to_adapt": null,
+      "best_pct": null,
+      "note": "the score of guessing"
+    }
+  ],
+  "learning_curves": {
+    "new product": {
+      "YOLO retrain": [
+        {
+          "n": 0,
+          "mean": 0.9125,
+          "min": 0.9125,
+          "s": 0.0
+        },
+        {
+          "n": 5,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 25.655
+        },
+        {
+          "n": 10,
+          "mean": 0.9875,
+          "min": 0.9875,
+          "s": 26.681
+        },
+        {
+          "n": 20,
+          "mean": 0.9875,
+          "min": 0.9875,
+          "s": 26.437
+        },
+        {
+          "n": 38,
+          "mean": 0.9875,
+          "min": 0.9875,
+          "s": 75.262
+        }
+      ],
+      "Fast classifier, human labels": [
+        {
+          "n": 0,
+          "mean": 0.8875,
+          "min": 0.8875,
+          "s": 0.0
+        },
+        {
+          "n": 5,
+          "mean": 0.9875,
+          "min": 0.9875,
+          "s": 0.007
+        },
+        {
+          "n": 10,
+          "mean": 0.9875,
+          "min": 0.9875,
+          "s": 0.007
+        },
+        {
+          "n": 20,
+          "mean": 0.9875,
+          "min": 0.9875,
+          "s": 0.008
+        },
+        {
+          "n": 38,
+          "mean": 0.9875,
+          "min": 0.9875,
+          "s": 0.009
+        }
+      ],
+      "Checker A": [
+        {
+          "n": 0,
+          "mean": 0.7875,
+          "min": 0.7875,
+          "s": 0.0
+        }
+      ],
+      "Checker B": [
+        {
+          "n": 0,
+          "mean": 0.7125,
+          "min": 0.7125,
+          "s": 0.0
+        }
+      ]
+    },
+    "lighting, night to day": {
+      "YOLO retrain": [
+        {
+          "n": 0,
+          "mean": 0.9846,
+          "min": 0.9846,
+          "s": 0.0
+        },
+        {
+          "n": 20,
+          "mean": 0.9846,
+          "min": 0.9846,
+          "s": 22.331
+        },
+        {
+          "n": 50,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 27.651
+        }
+      ],
+      "Fast classifier, human labels": [
+        {
+          "n": 0,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.0
+        },
+        {
+          "n": 5,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.01
+        },
+        {
+          "n": 10,
+          "mean": 0.9938,
+          "min": 0.9846,
+          "s": 0.007
+        },
+        {
+          "n": 20,
+          "mean": 0.9877,
+          "min": 0.9846,
+          "s": 0.007
+        },
+        {
+          "n": 50,
+          "mean": 0.9846,
+          "min": 0.9846,
+          "s": 0.009
+        }
+      ],
+      "Checker A": [
+        {
+          "n": 0,
+          "mean": 0.8154,
+          "min": 0.8154,
+          "s": 0.0
+        }
+      ],
+      "Checker B": [
+        {
+          "n": 0,
+          "mean": 0.8154,
+          "min": 0.8154,
+          "s": 0.0
+        }
+      ]
+    },
+    "lighting, day to night": {
+      "YOLO retrain": [
+        {
+          "n": 0,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.0
+        },
+        {
+          "n": 20,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 20.422
+        },
+        {
+          "n": 50,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 22.962
+        }
+      ],
+      "Fast classifier, human labels": [
+        {
+          "n": 0,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.0
+        },
+        {
+          "n": 5,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.005
+        },
+        {
+          "n": 10,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.006
+        },
+        {
+          "n": 20,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.005
+        },
+        {
+          "n": 50,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.005
+        }
+      ],
+      "Checker A": [
+        {
+          "n": 0,
+          "mean": 0.68,
+          "min": 0.68,
+          "s": 0.0
+        }
+      ],
+      "Checker B": [
+        {
+          "n": 0,
+          "mean": 0.56,
+          "min": 0.56,
+          "s": 0.0
+        }
+      ]
+    },
+    "camera moved": {
+      "YOLO retrain": [
+        {
+          "n": 0,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.0
+        },
+        {
+          "n": 20,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 31.999
+        },
+        {
+          "n": 50,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 32.192
+        }
+      ],
+      "Fast classifier, human labels": [
+        {
+          "n": 0,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.0
+        },
+        {
+          "n": 5,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.007
+        },
+        {
+          "n": 10,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.007
+        },
+        {
+          "n": 20,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.01
+        },
+        {
+          "n": 50,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.01
+        }
+      ],
+      "Fast classifier, checker A labels": null,
+      "Fast classifier, checker B labels": null,
+      "Checker A": [
+        {
+          "n": 0,
+          "mean": 0.8649,
+          "min": 0.8649,
+          "s": 0.0
+        }
+      ],
+      "Checker B": [
+        {
+          "n": 0,
+          "mean": 0.6757,
+          "min": 0.6757,
+          "s": 0.0
+        }
+      ]
+    },
+    "new layout": {
+      "YOLO retrain": [
+        {
+          "n": 0,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.0
+        },
+        {
+          "n": 20,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 14.98
+        },
+        {
+          "n": 50,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 18.016
+        }
+      ],
+      "Fast classifier, human labels": [
+        {
+          "n": 0,
+          "mean": 0.6486,
+          "min": 0.6486,
+          "s": 0.0
+        },
+        {
+          "n": 5,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.004
+        },
+        {
+          "n": 10,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.005
+        },
+        {
+          "n": 20,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.006
+        },
+        {
+          "n": 50,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.007
+        }
+      ],
+      "Fast classifier, checker A labels": [
+        {
+          "n": 0,
+          "mean": 0.6486,
+          "min": 0.6486,
+          "s": 0.0
+        },
+        {
+          "n": 5,
+          "mean": 0.6649,
+          "min": 0.6486,
+          "s": 0.004
+        },
+        {
+          "n": 10,
+          "mean": 0.6757,
+          "min": 0.6757,
+          "s": 0.003
+        },
+        {
+          "n": 20,
+          "mean": 0.6757,
+          "min": 0.6757,
+          "s": 0.003
+        },
+        {
+          "n": 39,
+          "mean": 0.6486,
+          "min": 0.6486,
+          "s": 0.006
+        }
+      ],
+      "Fast classifier, checker B labels": null,
+      "Checker A": [
+        {
+          "n": 0,
+          "mean": 0.9459,
+          "min": 0.9459,
+          "s": 0.0
+        }
+      ],
+      "Checker B": [
+        {
+          "n": 0,
+          "mean": 1.0,
+          "min": 1.0,
+          "s": 0.0
+        }
+      ]
+    }
+  },
+  "baselines_pct": {
+    "new product": 70.0,
+    "lighting, night to day": 81.5,
+    "lighting, day to night": 52.0,
+    "camera moved": 67.6,
+    "new layout": 64.9
+  },
+  "gate_share_pct": 4.8,
+  "camera_moved": {
+    "unsure_pct_before": 0.0,
+    "unsure_pct_after": 0.0,
+    "acc_before_pct": {
+      "YOLO": 100.0,
+      "Fast classifier": 100.0,
+      "Checker A": 72.5,
+      "Checker B": 72.5
+    },
+    "acc_after_pct": {
+      "YOLO": 100.0,
+      "Fast classifier": 100.0,
+      "Checker A": 86.5,
+      "Checker B": 67.6
+    },
+    "drift_alarm": false
+  },
+  "teacher_loop": {
+    "checker A": {
+      "confident_labels": 39,
+      "of_frames": 92,
+      "wrong_pct": 0.0,
+      "said_part": 9,
+      "said_empty": 30,
+      "coverage_check_pass": false,
+      "part_labels_by_true_label": {
+        "B": 9
+      },
+      "fit_s": 0.006,
+      "acc_pct": 64.9
+    },
+    "checker B": {
+      "confident_labels": 0,
+      "of_frames": 92,
+      "wrong_pct": null,
+      "said_part": 0,
+      "said_empty": 0,
+      "coverage_check_pass": false,
+      "part_labels_by_true_label": {},
+      "fit_s": null,
+      "acc_pct": null
+    }
+  },
+  "checker_eval": {
+    "Checker A": {
+      "auc_pct": {
+        "station 1 test": 87.2,
+        "camera moved test": 97.7,
+        "station 2 test": 100.0
+      },
+      "station1_avg_at_05_pct": 70.5,
+      "station1_avg_fitted_pct": 71.3,
+      "station1_avg_fitted_worst_pct": 69.8,
+      "cutoffs": [
+        0.456,
+        0.581,
+        0.655,
+        0.486,
+        0.49
+      ]
+    },
+    "Checker B": {
+      "auc_pct": {
+        "station 1 test": 71.4,
+        "camera moved test": 68.5,
+        "station 2 test": 100.0
+      },
+      "station1_avg_at_05_pct": 68.1,
+      "station1_avg_fitted_pct": 74.5,
+      "station1_avg_fitted_worst_pct": 70.9,
+      "cutoffs": [
+        0.601,
+        0.633,
+        0.62,
+        0.599,
+        0.555
+      ]
+    }
+  },
+  "guess_avg_pct": 66.7
+}
